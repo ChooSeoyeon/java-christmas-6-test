@@ -27,6 +27,15 @@ public enum Menu {
         this.type = type;
     }
 
+    public static Menu findMenuByName(String menuName) {
+        for (Menu menu : Menu.values()) {
+            if (menu.getName().equals(menuName)) {
+                return menu;
+            }
+        }
+        throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+    }
+
     public String getName() {
         return name;
     }
@@ -65,5 +74,9 @@ public enum Menu {
             }
         }
         return menus;
+    }
+
+    public boolean isBeverage() {
+        return type == MenuType.DRINK;
     }
 }

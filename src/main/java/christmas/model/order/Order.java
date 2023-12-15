@@ -1,5 +1,6 @@
 package christmas.model.order;
 
+import christmas.model.order.dto.OrderRequest;
 import christmas.model.order.enums.Menu;
 
 public class Order {
@@ -10,6 +11,10 @@ public class Order {
         this.menu = menu;
         this.count = count;
         validate();
+    }
+
+    public static Order create(OrderRequest request) {
+        return new Order(Menu.findMenuByName(request.menuName()), request.quantity());
     }
 
     private void validate() {
@@ -24,5 +29,9 @@ public class Order {
 
     public int getCount() {
         return count;
+    }
+
+    public boolean isBeverage() {
+        return menu.isBeverage();
     }
 }
