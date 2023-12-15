@@ -1,5 +1,6 @@
 package christmas.model.order;
 
+import christmas.model.order.dto.OrderFindAllResponse;
 import christmas.model.order.dto.OrderRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,5 +32,15 @@ public class Orders {
         if (orders.size() > 20) {
             throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
+    }
+
+    public List<OrderFindAllResponse> findAll() {
+        return OrderFindAllResponse.create(orders, calculateTotalPrice());
+    }
+
+    private int calculateTotalPrice() {
+        return orders.stream()
+                .mapToInt(Order::calculatePrice)
+                .sum();
     }
 }

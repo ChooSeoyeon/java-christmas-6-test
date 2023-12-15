@@ -23,15 +23,19 @@ public class Order {
         }
     }
 
-    public Menu getMenu() {
-        return menu;
-    }
-
     public int getCount() {
         return count;
     }
 
     public boolean isBeverage() {
         return menu.isBeverage();
+    }
+
+    public int calculatePrice() {
+        return menu.calculatePrice(count);
+    }
+
+    public String getMenuName() {
+        return menu.getName();
     }
 }

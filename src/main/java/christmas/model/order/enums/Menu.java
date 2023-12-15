@@ -79,4 +79,8 @@ public enum Menu {
     public boolean isBeverage() {
         return type == MenuType.DRINK;
     }
+
+    public int calculatePrice(int count) {
+        return price * count;
+    }
 }
