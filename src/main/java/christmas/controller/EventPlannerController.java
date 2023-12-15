@@ -1,7 +1,9 @@
 package christmas.controller;
 
+import christmas.model.order.dto.OrderRequest;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class EventPlannerController {
@@ -15,6 +17,25 @@ public class EventPlannerController {
     }
 
     public void run() {
+        start();
+        order();
+    }
+
+    private void start() { // TODO: 캘린더 반환
+        outputView.printStartMessage();
+        int date = repeatUntilSuccessWithReturn(this::readDate);
+    }
+
+    private List<OrderRequest> order() { // TODO: order 반환
+        return repeatUntilSuccessWithReturn(this::readOrder);
+    }
+
+    private List<OrderRequest> readOrder() {
+        return inputView.readOrder();
+    }
+
+    private int readDate() {
+        return inputView.readDate();
     }
 
     private <T> T repeatUntilSuccessWithReturn(Supplier<T> supplier) {
