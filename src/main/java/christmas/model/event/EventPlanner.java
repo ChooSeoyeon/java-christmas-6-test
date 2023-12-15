@@ -17,8 +17,8 @@ public class EventPlanner {
         int totalDiscountPrice = discountEvents.stream()
                 .mapToInt(discountEvent -> discountEvent.calculateDiscount(orders, eventCalendar))
                 .sum(); // 총 할인 금액
-        int totalBenefitPrice = totalDiscountPrice - giftEvent.getGiftPrice();
-        BadgeEvent badgeEvent = BadgeEvent.findEligibleBadge(totalBenefitPrice); // (출력) 총혜택 금액
+        int totalBenefitPrice = totalDiscountPrice + giftEvent.getGiftPrice(); // (출력) 총혜택 금액
+        BadgeEvent badgeEvent = BadgeEvent.findEligibleBadge(totalBenefitPrice);
 
         int totalPaymentPrice = totalPrice - totalDiscountPrice;  // (출력) 예상 결제 금액 = 총주문 금액 - 할인 금액
         return new EventResponse(giftEvent, discountEvents, badgeEvent, totalBenefitPrice, totalPaymentPrice);

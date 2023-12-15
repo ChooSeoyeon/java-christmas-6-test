@@ -54,9 +54,17 @@ public class OutputView {
         System.out.println(formatBadge(eventResponse));
     }
 
+    public String formatTotalBenefitPrice(EventResponse eventResponse) {
+        int totalBenefitPrice = eventResponse.totalBenefitPrice();
+        if (totalBenefitPrice != 0) {
+            totalBenefitPrice *= (-1);
+        }
+        return formatPrice(totalBenefitPrice);
+    }
+
     public String formatBenefit(EventResponse eventResponse, Orders orders, EventCalendar eventCalendar) {
         return eventResponse.discounts().stream()
-                .map(discountEvent -> discountEvent.getDiscountName() + " -" + formatPrice(
+                .map(discountEvent -> discountEvent.getDiscountName() + ": -" + formatPrice(
                         discountEvent.calculateDiscount(orders, eventCalendar)))
                 .reduce((s1, s2) -> s1 + "\n" + s2)
                 .orElse("없음") + formatGiftInList(eventResponse.gift());
@@ -77,6 +85,6 @@ public class OutputView {
         if (gift == GiftEvent.NONE) {
             return "";
         }
-        return "\n" + gift.getGiftMenu() + " " + formatPrice(gift.getGiftPrice());
+        return "\n증정 이벤트: " + formatPrice(gift.getGiftPrice());
     }
 }
