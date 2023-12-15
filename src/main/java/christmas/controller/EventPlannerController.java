@@ -3,6 +3,7 @@ package christmas.controller;
 import christmas.model.order.dto.OrderRequest;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -19,6 +20,7 @@ public class EventPlannerController {
     public void run() {
         start();
         order();
+        event();
     }
 
     private void start() { // TODO: 캘린더 반환
@@ -28,6 +30,10 @@ public class EventPlannerController {
 
     private List<OrderRequest> order() { // TODO: order 반환
         return repeatUntilSuccessWithReturn(this::readOrder);
+    }
+
+    private void event() {
+        outputView.printEventStartMessageWith(LocalDate.now());
     }
 
     private List<OrderRequest> readOrder() {
