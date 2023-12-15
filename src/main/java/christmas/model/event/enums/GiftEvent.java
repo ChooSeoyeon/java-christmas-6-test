@@ -43,4 +43,8 @@ public enum GiftEvent {
         }
         return Menu.findMenuByName(giftMenu).getPrice() * quantity;
     }
+
+    public String getName() {
+        return giftMenu;
+    }
 }

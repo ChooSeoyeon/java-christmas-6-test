@@ -61,4 +61,8 @@ public enum DiscountEvent {
         }
         return discountEvents;
     }
+
+    public String getDiscountName() {
+        return this.name;
+    }
 }
