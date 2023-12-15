@@ -41,4 +41,8 @@ public class EventCalendar {
     public boolean isBeforeChristmasDay() {
         return visitedDate.getDayOfMonth() <= 25;
     }
+
+    public LocalDate getVisitedDate() {
+        return visitedDate;
+    }
 }

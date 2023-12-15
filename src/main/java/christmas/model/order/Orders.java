@@ -34,7 +34,7 @@ public class Orders {
         }
     }
 
-    public List<OrderFindAllResponse> findAll() {
+    public OrderFindAllResponse findAll() {
         return OrderFindAllResponse.create(orders, calculateTotalPrice());
     }
 

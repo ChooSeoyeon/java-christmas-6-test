@@ -25,10 +25,9 @@ public class OutputView {
     public void printOrderResponse(OrderFindAllResponse response) {
         System.out.println("\n<주문 메뉴>");
         response.orders().forEach(order -> {
-            System.out.println(order.menuName() + " | " + order.quantity());
+            System.out.println(order.menuName() + " " + order.quantity() + "개");
         });
-        System.out.println();
-        System.out.println("<할인 전 총주문 금액>");
+        System.out.println("\n<할인 전 총주문 금액>");
         System.out.println(formatPrice(response.totalPrice()));
     }
 
