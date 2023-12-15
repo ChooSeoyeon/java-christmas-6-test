@@ -39,7 +39,7 @@ public class EventPlannerController {
     }
 
     private void event() {
-
+        outputView.printEventResponse(null);
     }
 
     private List<OrderRequest> readOrder() {
