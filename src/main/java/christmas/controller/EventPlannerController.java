@@ -45,7 +45,7 @@ public class EventPlannerController {
     private void event(Orders orders, EventCalendar eventCalendar) {
         EventPlanner eventPlanner = new EventPlanner();
         EventResponse eventResponse = eventPlanner.applyTo(orders, eventCalendar);
-        outputView.printEventResponse(eventResponse);
+        outputView.printEventResponse(eventResponse, orders, eventCalendar);
     }
 
     private EventCalendar readDate() {

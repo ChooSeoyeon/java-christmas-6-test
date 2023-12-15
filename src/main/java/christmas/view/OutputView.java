@@ -1,7 +1,9 @@
 package christmas.view;
 
+import christmas.model.event.EventCalendar;
 import christmas.model.event.dto.EventResponse;
 import christmas.model.event.enums.GiftEvent;
+import christmas.model.order.Orders;
 import christmas.model.order.dto.OrderFindAllResponse;
 import java.time.LocalDate;
 
@@ -35,20 +37,39 @@ public class OutputView {
         return String.format("%,d", number) + "원";
     }
 
-    public void printEventResponse(EventResponse eventResponse) {
-        System.out.println("<증정 메뉴>");
+    public void printEventResponse(EventResponse eventResponse, Orders orders, EventCalendar eventCalendar) {
+        System.out.println("\n<증정 메뉴>");
         System.out.println(formatGift(eventResponse.gift()));
         System.out.println();
-        System.out.println("<혜택 내역>\n없음"); // TODO: 하드코딩 제거 필요
+        System.out.println("<혜택 내역>"); // TODO: dto 세부 분리 필요
+        System.out.println(formatBenefit(eventResponse, orders, eventCalendar));
         System.out.println();
         System.out.println("<총혜택 금액>");
+        System.out.println(formatPrice(eventResponse.totalBenefitPrice()));
         System.out.println();
         System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println(formatPrice(eventResponse.totalPaymentPrice()));
         System.out.println();
         System.out.println("<12월 이벤트 배지>");
+        System.out.println(formatBadge(eventResponse));
+    }
+
+    public String formatBenefit(EventResponse eventResponse, Orders orders, EventCalendar eventCalendar) {
+        return eventResponse.discounts().stream()
+                .map(discountEvent -> discountEvent.name() + " " + formatPrice(
+                        discountEvent.calculateDiscount(orders, eventCalendar)))
+                .reduce((s1, s2) -> s1 + "\n" + s2)
+                .orElse("없음");
+    }
+
+    public String formatBadge(EventResponse eventResponse) {
+        return eventResponse.badge().getName();
     }
 
     public String formatGift(GiftEvent gift) {
+        if (gift == GiftEvent.NONE) {
+            return "없음";
+        }
         return gift.name() + " " + gift + "개";
     }
 }

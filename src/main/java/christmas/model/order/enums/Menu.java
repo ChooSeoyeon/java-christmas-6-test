@@ -29,8 +29,6 @@ public enum Menu {
 
     public static Menu findMenuByName(String menuName) {
         for (Menu menu : Menu.values()) {
-            System.out.println("menu = " + menu.getName());
-            System.out.println("menuName = " + menuName);
             if (menu.getName().equals(menuName)) {
                 return menu;
             }
