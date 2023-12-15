@@ -20,7 +20,7 @@ public enum DiscountEvent {
         @Override
         public int calculateDiscount(Orders orders, EventCalendar eventCalendar) {
             if (eventCalendar.isWeekday()) {
-                return 1000 * orders.findCountBy(MenuType.DESSERT);
+                return 2023 * orders.findCountBy(MenuType.DESSERT);
             }
             return 0;
         }
@@ -29,7 +29,7 @@ public enum DiscountEvent {
         @Override
         public int calculateDiscount(Orders orders, EventCalendar eventCalendar) {
             if (eventCalendar.isWeekend()) {
-                return 1000 * orders.findCountBy(MenuType.DESSERT);
+                return 2023 * orders.findCountBy(MenuType.MAIN);
             }
             return 0;
         }

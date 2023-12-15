@@ -46,8 +46,11 @@ public class Orders {
     }
 
     public int findCountBy(MenuType menuType) {
-        return (int) orders.stream()
-                .filter(order -> order.isSameMenuType(menuType))
-                .count();
+        for (Order order : orders) {
+            if (order.isSameMenuType(menuType)) {
+                return order.getCount();
+            }
+        }
+        return 0;
     }
 }
