@@ -1,5 +1,7 @@
 package christmas.model.event.enums;
 
+import christmas.model.order.enums.Menu;
+
 public enum GiftEvent {
     CHAMPAGNE_GIFT("샴페인", 1, 120000),
     NONE("없음", 0, 0);
@@ -33,5 +35,9 @@ public enum GiftEvent {
             }
         }
         return NONE;
+    }
+
+    public int getGiftPrice() {
+        return Menu.findMenuByName(giftMenu).getPrice() * quantity;
     }
 }

@@ -39,7 +39,7 @@ public class Orders {
         return OrderFindAllResponse.create(orders, calculateTotalPrice());
     }
 
-    private int calculateTotalPrice() {
+    public int calculateTotalPrice() {
         return orders.stream()
                 .mapToInt(Order::calculatePrice)
                 .sum();
