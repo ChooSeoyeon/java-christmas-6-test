@@ -44,12 +44,12 @@ public enum DiscountEvent {
         }
     };
 
-    private final String name;
+    private final String eventName;
 
     public abstract int calculateDiscount(Orders orders, EventCalendar eventCalendar);
 
-    DiscountEvent(String name) {
-        this.name = name();
+    DiscountEvent(String eventName) {
+        this.eventName = eventName;
     }
 
     public static List<DiscountEvent> findEligibleEvents(Orders orders, EventCalendar eventCalendar) {
@@ -63,6 +63,6 @@ public enum DiscountEvent {
     }
 
     public String getDiscountName() {
-        return this.name;
+        return this.eventName;
     }
 }
