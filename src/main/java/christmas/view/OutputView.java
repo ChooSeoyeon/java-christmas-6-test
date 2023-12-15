@@ -39,7 +39,7 @@ public class OutputView {
         System.out.println("<증정 메뉴>");
         //System.out.println(formatGift(eventResponse.gift()));
         System.out.println();
-        System.out.println("<혜택 내역>");
+        System.out.println("<혜택 내역>\n없음"); // TODO: 하드코딩 제거 필요
         System.out.println();
         System.out.println("<총혜택 금액>");
         System.out.println();

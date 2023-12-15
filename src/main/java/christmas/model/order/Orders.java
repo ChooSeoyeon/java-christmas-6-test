@@ -2,6 +2,7 @@ package christmas.model.order;
 
 import christmas.model.order.dto.OrderFindAllResponse;
 import christmas.model.order.dto.OrderRequest;
+import christmas.model.order.enums.MenuType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,5 +43,11 @@ public class Orders {
         return orders.stream()
                 .mapToInt(Order::calculatePrice)
                 .sum();
+    }
+
+    public int findCountBy(MenuType menuType) {
+        return (int) orders.stream()
+                .filter(order -> order.isSameMenuType(menuType))
+                .count();
     }
 }

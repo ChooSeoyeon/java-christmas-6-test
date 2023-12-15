@@ -83,4 +83,8 @@ public enum Menu {
     public int calculatePrice(int count) {
         return price * count;
     }
+
+    public boolean isSameMenuType(MenuType menuType) {
+        return type == menuType;
+    }
 }

@@ -2,6 +2,7 @@ package christmas.model.order;
 
 import christmas.model.order.dto.OrderRequest;
 import christmas.model.order.enums.Menu;
+import christmas.model.order.enums.MenuType;
 
 public class Order {
     private final Menu menu;
@@ -37,5 +38,9 @@ public class Order {
 
     public String getMenuName() {
         return menu.getName();
+    }
+
+    public boolean isSameMenuType(MenuType menuType) {
+        return menu.isSameMenuType(menuType);
     }
 }
