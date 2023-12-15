@@ -1,5 +1,7 @@
 package christmas.controller;
 
+import christmas.model.order.dto.OrderDto;
+import christmas.model.order.dto.OrderFindAllResponse;
 import christmas.model.order.dto.OrderRequest;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -28,12 +30,16 @@ public class EventPlannerController {
         int date = repeatUntilSuccessWithReturn(this::readDate);
     }
 
-    private List<OrderRequest> order() { // TODO: order 반환
-        return repeatUntilSuccessWithReturn(this::readOrder);
+    private void order() { // TODO: order 반환
+        List<OrderRequest> orderRequests = repeatUntilSuccessWithReturn(this::readOrder);
+        outputView.printEventStartMessageWith(LocalDate.now());
+        outputView.printOrderResponse(new OrderFindAllResponse
+                (List.of(new OrderDto("후라이드", 1)),
+                        1000));
     }
 
     private void event() {
-        outputView.printEventStartMessageWith(LocalDate.now());
+
     }
 
     private List<OrderRequest> readOrder() {

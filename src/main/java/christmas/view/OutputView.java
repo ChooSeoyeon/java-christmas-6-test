@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.model.order.dto.OrderFindAllResponse;
 import java.time.LocalDate;
 
 public class OutputView {
@@ -17,5 +18,19 @@ public class OutputView {
 
     public String formatDate(LocalDate date) {
         return date.getMonthValue() + "월 " + date.getDayOfMonth() + "일";
+    }
+
+    public void printOrderResponse(OrderFindAllResponse response) {
+        System.out.println("\n<주문 메뉴>");
+        response.orders().forEach(order -> {
+            System.out.println(order.menuName() + " | " + order.quantity());
+        });
+        System.out.println();
+        System.out.println("<할인 전 총주문 금액>");
+        System.out.println(formatPrice(response.totalPrice()));
+    }
+
+    public String formatPrice(int number) {
+        return String.format("%,d", number) + "원";
     }
 }
