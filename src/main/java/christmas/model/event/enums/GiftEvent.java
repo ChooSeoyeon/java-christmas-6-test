@@ -38,6 +38,9 @@ public enum GiftEvent {
     }
 
     public int getGiftPrice() {
+        if (this == NONE) {
+            return 0;
+        }
         return Menu.findMenuByName(giftMenu).getPrice() * quantity;
     }
 }

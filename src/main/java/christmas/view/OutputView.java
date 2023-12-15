@@ -37,7 +37,7 @@ public class OutputView {
 
     public void printEventResponse(EventResponse eventResponse) {
         System.out.println("<증정 메뉴>");
-        //System.out.println(formatGift(eventResponse.gift()));
+        System.out.println(formatGift(eventResponse.gift()));
         System.out.println();
         System.out.println("<혜택 내역>\n없음"); // TODO: 하드코딩 제거 필요
         System.out.println();
@@ -49,6 +49,6 @@ public class OutputView {
     }
 
     public String formatGift(GiftEvent gift) {
-        return gift.name() + " | " + gift + "개";
+        return gift.name() + " " + gift + "개";
     }
 }

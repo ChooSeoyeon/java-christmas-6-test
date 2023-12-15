@@ -1,6 +1,8 @@
 package christmas.controller;
 
 import christmas.model.event.EventCalendar;
+import christmas.model.event.EventPlanner;
+import christmas.model.event.dto.EventResponse;
 import christmas.model.order.Orders;
 import christmas.model.order.dto.OrderFindAllResponse;
 import christmas.model.order.dto.OrderRequest;
@@ -21,8 +23,8 @@ public class EventPlannerController {
 
     public void run() {
         EventCalendar eventCalendar = start();
-        order(eventCalendar);
-        event();
+        Orders orders = repeatUntilSuccessWithReturn(() -> order(eventCalendar));
+        event(orders, eventCalendar);
     }
 
     private EventCalendar start() {
@@ -30,21 +32,20 @@ public class EventPlannerController {
         return repeatUntilSuccessWithReturn(this::readDate);
     }
 
-    private void order(EventCalendar eventCalendar) { // TODO: order 반환
-        List<OrderRequest> orderRequests = repeatUntilSuccessWithReturn(this::readOrder);
+    private Orders order(EventCalendar eventCalendar) {
+        List<OrderRequest> orderRequests = inputView.readOrder();
         outputView.printEventStartMessageWith(eventCalendar.getVisitedDate());
         Orders orders = new Orders();
         orders.addBy(orderRequests);
         OrderFindAllResponse orderFindAllResponse = orders.findAll();
         outputView.printOrderResponse(orderFindAllResponse);
+        return orders;
     }
 
-    private void event() {
-        outputView.printEventResponse(null);
-    }
-
-    private List<OrderRequest> readOrder() {
-        return inputView.readOrder();
+    private void event(Orders orders, EventCalendar eventCalendar) {
+        EventPlanner eventPlanner = new EventPlanner();
+        EventResponse eventResponse = eventPlanner.applyTo(orders, eventCalendar);
+        outputView.printEventResponse(eventResponse);
     }
 
     private EventCalendar readDate() {
